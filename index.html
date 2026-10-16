@@ -8,22 +8,24 @@
 <style>
 :root{--bg:#171817;--panel:#222421;--panel2:#2b2d29;--text:#f5f5f2;--muted:#a8aaa4;--accent:#f27b54;--line:#3b3d38}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 system-ui,-apple-system,Segoe UI,sans-serif;height:100dvh}
-button,input,textarea{font:inherit}button{cursor:pointer;border:0;color:inherit} .app{height:100dvh;display:flex;flex-direction:column;max-width:1000px;margin:auto}
+button,input,textarea,select{font:inherit}button{cursor:pointer;border:0;color:inherit} .app{height:100dvh;display:flex;flex-direction:column;max-width:1000px;margin:auto}
 header{height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;border-bottom:1px solid var(--line);background:var(--bg)}
 .brand{font-weight:750;font-size:19px;letter-spacing:.2px}.brand span{color:var(--accent)}.sub{font-size:12px;color:var(--muted)}
 .head-actions{display:flex;gap:8px;align-items:center}.smallbtn{background:var(--panel2);border:1px solid var(--line);padding:8px 11px;border-radius:12px;font-size:13px}
 #chat{flex:1;overflow:auto;padding:22px 16px 14px;display:flex;flex-direction:column;gap:16px}
-.welcome{max-width:620px;margin:auto;text-align:center;padding:24px 8px}.orb{font-size:36px;margin-bottom:8px}.welcome h1{font-size:clamp(24px,4vw,34px);margin:0 0 8px}.welcome p{color:var(--muted);margin:0 auto 20px;max-width:450px}
+.welcome{max-width:620px;margin:auto;text-align:center;padding:24px 8px}.orb{font-size:36px;margin-bottom:8px}.welcome h1{font-size:clamp(24px,4vw,34px);margin:0 0 8px}.welcome p{color:var(--muted)}
 .suggestions{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}.suggestions button{border:1px solid var(--line);background:var(--panel);padding:10px 13px;border-radius:14px;font-size:14px}
-.msg{max-width:min(82%,700px);padding:12px 15px;border-radius:18px;white-space:pre-wrap;overflow-wrap:anywhere}.user{align-self:flex-end;background:#f4f3ee;color:#1c1c1b;border-bottom-right-radius:5px}.bot{align-self:flex-start;background:var(--panel2);border-bottom-left-radius:5px}.msg img{max-width:100%;max-height:260px;display:block;border-radius:12px;margin-top:8px}.typing{color:var(--muted);font-size:14px}
+.msg{max-width:min(82%,700px);padding:12px 15px;border-radius:18px;white-space:pre-wrap;overflow-wrap:anywhere}.user{align-self:flex-end;background:#f4f3ee;color:#1c1c1b;border-bottom-right-radius:5px}
+.bot{align-self:flex-start;background:var(--panel);color:var(--text)}
 .compose-wrap{padding:12px 14px max(14px,env(safe-area-inset-bottom));border-top:1px solid var(--line);background:var(--bg)}
-.preview{display:none;margin:0 auto 8px;max-width:720px;align-items:center;gap:10px;background:var(--panel);padding:8px;border-radius:12px}.preview img{height:64px;width:64px;object-fit:cover;border-radius:8px}.preview button{margin-left:auto;background:var(--panel2);border-radius:8px;padding:7px 10px}
+.preview{display:none;margin:0 auto 8px;max-width:720px;align-items:center;gap:10px;background:var(--panel);padding:8px;border-radius:12px}.preview img{height:64px;width:64px;object-fit:cover;border-radius:8px}
 .composer{max-width:720px;margin:auto;background:var(--panel);border:1px solid #50524b;border-radius:22px;padding:8px;display:flex;align-items:flex-end;gap:7px}
-.iconbtn{flex:0 0 40px;width:40px;height:40px;border-radius:14px;background:transparent;font-size:20px;display:grid;place-items:center}.iconbtn:hover{background:var(--panel2)}.send{background:var(--accent);color:#21140f;font-size:21px;font-weight:800}
+.iconbtn{flex:0 0 40px;width:40px;height:40px;border-radius:14px;background:transparent;font-size:20px;display:grid;place-items:center}.iconbtn:hover{background:var(--panel2)}.send{background:var(--accent);color:#111}
 textarea{flex:1;min-width:0;resize:none;max-height:150px;border:0;outline:0;background:transparent;color:var(--text);padding:10px 4px;line-height:1.4}textarea::placeholder{color:var(--muted)}
-.toolbar{max-width:720px;margin:9px auto 0;display:flex;gap:7px;flex-wrap:wrap;align-items:center}.pill{font-size:12px;color:var(--muted);background:var(--panel);border:1px solid var(--line);padding:6px 9px;border-radius:999px}.pill.active{color:#fff;border-color:var(--accent);background:#503126}
+.toolbar{max-width:720px;margin:9px auto 0;display:flex;gap:7px;flex-wrap:wrap;align-items:center}.pill{font-size:12px;color:var(--muted);background:var(--panel);border:1px solid var(--line);padding:6px 10px;border-radius:14px}
 .notice{font-size:12px;color:var(--muted);text-align:center;margin:8px auto 0;max-width:720px}
-.modal{display:none;position:fixed;inset:0;background:#000b;z-index:10;align-items:center;justify-content:center;padding:16px}.modal.open{display:flex}.modalbox{width:min(100%,560px);background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px}.modalbox video{width:100%;background:#000;border-radius:12px;max-height:55vh}.modalhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.modalhead h2{font-size:18px;margin:0}.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.primary{background:var(--accent);color:#21140f;border-radius:11px;padding:10px 14px;font-weight:650}.secondary{background:var(--panel2);border:1px solid var(--line);border-radius:11px;padding:10px 14px}
+.modal{display:none;position:fixed;inset:0;background:#000b;z-index:10;align-items:center;justify-content:center;padding:16px}.modal.open{display:flex}.modalbox{width:min(100%,560px);background:var(--panel);border-radius:12px;padding:12px;border:1px solid var(--line)}
+.controls{display:flex;gap:8px;align-items:center}
 @media(max-width:520px){header{height:58px;padding:0 12px}.msg{max-width:92%}#chat{padding:16px 12px}.toolbar{gap:5px}.pill{font-size:11px}.composer{gap:3px}.iconbtn{width:36px;flex-basis:36px}}
 </style>
 </head>
@@ -31,14 +33,15 @@ textarea{flex:1;min-width:0;resize:none;max-height:150px;border:0;outline:0;back
 <div class="app">
 <header>
  <div><div class="brand">✦ RÜRÜGBT <span>Güncelleme</span></div><div class="sub">Türkçe yapay zekâ asistanı</div></div>
- <div class="head-actions"><button class="smallbtn" id="newChat">＋ Yeni sohbet</button><button class="smallbtn" id="theme" aria-label="Tema">☾</button></div>
+ <div class="head-actions"><div class="controls"><label for="speed" class="sub" style="margin-right:6px">Hız:</label><select id="speed" class="smallbtn"><option value="fast">Hızlı</option><option value="normal" selected>Normal</option><option value="slow">Yavaş</option></select><button class="smallbtn" id="stop">■ Durdur</button></div></div>
 </header>
 <main id="chat" aria-live="polite">
  <section class="welcome" id="welcome"><div class="orb">🤖</div><h1>Selam! Ben RÜRÜGBT.</h1><p>Matematik, ödev, kod, fotoğraf analizi veya sohbet… Ne yapmak istersin?</p>
- <div class="suggestions"><button data-prompt="Bana 1+1 işlemini açıkla.">➗ Matematik sor</button><button data-prompt="Bir metin sorusunu çözmeme yardım et.">📚 Ödev yardımı</button><button data-prompt="Bana bir oyun fikri öner.">🎮 Oyun fikri</button></div></section>
+ <div class="suggestions"><button data-prompt="Bana 1+1 işlemini açıkla.">➗ Matematik sor</button><button data-prompt="Bir metin sorunu çözmeme yardım et.">📚 Ödev yardımı</button><button data-prompt="Bu fotoğrafta ne var?">🖼️ Fotoğraf analizi</button></div>
+ </section>
 </main>
 <div class="compose-wrap">
- <div class="preview" id="preview"><img id="previewImg" alt="Seçilen fotoğraf önizlemesi"><span>Fotoğraf hazır</span><button id="removePhoto">Kaldır</button></div>
+ <div class="preview" id="preview"><img id="previewImg" alt="Seçilen fotoğraf önizlemesi"><span id="previewText">Fotoğraf hazır</span><button id="removePhoto">Kaldır</button></div>
  <div class="composer">
   <button class="iconbtn" id="attach" title="Fotoğraf seç">＋</button>
   <textarea id="input" rows="1" placeholder="Rürügbt'ye mesaj yaz..." aria-label="Mesaj"></textarea>
@@ -47,41 +50,199 @@ textarea{flex:1;min-width:0;resize:none;max-height:150px;border:0;outline:0;back
   <button class="iconbtn send" id="send" title="Gönder">➤</button>
  </div>
  <input type="file" id="file" accept="image/*" hidden>
- <div class="toolbar"><button class="pill" id="deep">🧠 Derin düşünme: Kapalı</button><button class="pill" id="readAloud">🔊 Son cevabı oku</button><button class="pill" id="makeImage">🎨 Görsel oluştur</button><button class="pill" id="makeVideo">🎬 Video oluştur</button></div>
+ <div class="toolbar"><button class="pill" id="deep">🧠 Derin düşünme: Kapalı</button><button class="pill" id="readAloud">🔊 Son cevabı oku</button><button class="pill" id="makeImage">🎨 Görsel oluştur</button><button class="pill" id="makeVideo">🎞️ Video oluştur</button><button class="pill" id="loadClaude">📥 Claude artifact yükle</button></div>
  <div class="notice">Not: Fotoğraf/kamera ve ses özellikleri tarayıcı desteğine bağlıdır. Gerçek yapay zekâ, görsel ve video üretimi için güvenli API bağlantısı gerekir.</div>
 </div>
 </div>
-<div class="modal" id="cameraModal"><div class="modalbox"><div class="modalhead"><h2>📷 Kamera</h2><button class="secondary" id="closeCamera">Kapat</button></div><video id="video" autoplay playsinline></video><div class="row"><button class="primary" id="takePhoto">Fotoğraf çek</button><button class="secondary" id="switchFile">Galeriden seç</button></div><canvas id="canvas" hidden></canvas></div></div>
+<div class="modal" id="cameraModal"><div class="modalbox"><div class="modalhead"><h2>📷 Kamera</h2><button class="secondary" id="closeCamera">Kapat</button></div><video id="video" autoplay playsinline style="max-width:100%;border-radius:8px;margin-top:8px"></video><div style="display:flex;gap:8px;margin-top:8px"><button id="takePhoto" class="pill">📸 Fotoğraf çek</button><button id="closeCamera2" class="pill">Kapat</button></div><canvas id="canvas" style="display:none"></canvas></div></div>
 <script>
-const $=id=>document.getElementById(id), chat=$('chat'); let selectedFile=null, deep=false, lastAnswer='', stream=null, dark=true;
-function addMessage(text,who='bot',imageUrl=null){$('welcome')?.remove();const d=document.createElement('div');d.className='msg '+who;d.textContent=text;if(imageUrl){const im=document.createElement('img');im.src=imageUrl;im.alt='Eklenen fotoğraf';d.appendChild(im)}chat.appendChild(d);chat.scrollTop=chat.scrollHeight;return d}
-function localAnswer(q){
- const s=q.toLocaleLowerCase('tr-TR').trim();
- const math=s.match(/^\s*(-?\d+(?:[.,]\d+)?)\s*([+\-*×÷/])\s*(-?\d+(?:[.,]\d+)?)\s*[?!.]?\s*$/);
- if(math){let a=Number(math[1].replace(',','.')),b=Number(math[3].replace(',','.')),op=math[2],r;if(op==='+' )r=a+b;else if(op==='-' )r=a-b;else if(op==='*'||op==='×')r=a*b;else if(op==='/'||op==='÷')r=b===0?null:a/b;return r===null?'Sıfıra bölme yapılamaz.':`${a} ${op} ${b} = ${Number(r.toPrecision(12))}.`}
- if(/^(selam|merhaba|sa|selamlar)\b/.test(s))return 'Selam! Ben RÜRÜGBT 🤖 Sana matematik, ödev, kod ve sohbet konularında yardımcı olmaya hazırım.';
- if(s.includes('kimsin')||s.includes('adın ne'))return 'Ben RÜRÜGBT Güncelleme. Türkçe konuşan bir yardımcı arayüzüyüm.';
- if(s.includes('ödev')||s.includes('metin sor'))return 'Tabii! Sorunun metnini yazabilir veya fotoğrafını ekleyebilirsin. Birlikte adım adım inceleyelim.';
- if(s.includes('görsel oluştur')||s.includes('resim yap')||s.includes('video oluştur'))return 'Bu arayüzde ilgili düğme hazır. Gerçek görsel/video üretmek için bir üretim API’si bağlanması gerekiyor; henüz API bağlanmadığı için burada üretim yapamam.';
- if(s.includes('kamera')||s.includes('fotoğraf'))return 'Fotoğraf eklemek için 📷 düğmesini veya ＋ düğmesini kullanabilirsin. Fotoğrafı anlayıp sorularını cevaplamam için görsel destekleyen bir yapay zekâ API’si bağlanmalı.';
- return 'Mesajını aldım! Şu anda arayüzün yerel deneme modu çalışıyor. Gerçek sohbet cevapları için güvenli bir sunucu üzerinden yapay zekâ API’si bağlanması gerekiyor. Bu sürümde basit matematik işlemlerini yerel olarak çözebilirim.';
+// Helper to get element
+const $ = id => document.getElementById(id);
+const chat = $('chat');
+let selectedFile = null, deep = false, lastAnswer = '', stream = null, dark = true;
+let typingController = { stopped: false };
+let claudeArtifact = null; // placeholder to store pasted artifact content
+
+function addMessage(text, who='bot', imageUrl=null){
+  try{ $('welcome')?.remove(); }catch(e){}
+  const d = document.createElement('div');
+  d.className = 'msg ' + (who === 'user' ? 'user' : 'bot');
+  if(imageUrl){
+    const im = document.createElement('img');
+    im.src = imageUrl; im.alt = 'image'; im.style.maxWidth = '240px'; im.style.display='block'; im.style.borderRadius='8px';
+    d.appendChild(im);
+    const span = document.createElement('div'); span.textContent = text; span.style.marginTop='8px'; d.appendChild(span);
+  } else {
+    d.textContent = text;
+  }
+  chat.appendChild(d);
+  chat.scrollTop = chat.scrollHeight;
+  return d;
 }
-async function sendMessage(){const q=$('input').value.trim();if(!q&&!selectedFile)return;const f=selectedFile;let url=f?URL.createObjectURL(f):null;if(q)addMessage(q,'user',url);else if(url)addMessage('Fotoğraf ekledim.','user',url);$('input').value='';$('input').style.height='auto';selectedFile=null;$('preview').style.display='none';
- const typing=addMessage('RÜRÜGBT düşünüyor…','bot');await new Promise(r=>setTimeout(r,deep?700:250));const answer=localAnswer(q||'Fotoğrafı analiz et');typing.textContent=(deep?'🧠 Derin düşünme açık · ':'')+answer;lastAnswer=answer;chat.scrollTop=chat.scrollHeight;}
-$('send').addEventListener('click',sendMessage);$('input').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMessage()}});$('input').addEventListener('input',e=>{e.target.style.height='auto';e.target.style.height=Math.min(e.target.scrollHeight,150)+'px'});
-document.querySelectorAll('[data-prompt]').forEach(b=>b.onclick=()=>{$('input').value=b.dataset.prompt;$('input').focus()});
-$('newChat').onclick=()=>{chat.innerHTML='';const w=document.createElement('section');w.className='welcome';w.id='welcome';w.innerHTML='<div class="orb">🤖</div><h1>Yeni sohbet</h1><p>Ne hakkında konuşalım?</p>';chat.appendChild(w);lastAnswer=''};
-$('theme').onclick=()=>{dark=!dark;document.documentElement.style.setProperty('--bg',dark?'#171817':'#f4f4f0');document.documentElement.style.setProperty('--panel',dark?'#222421':'#ffffff');document.documentElement.style.setProperty('--panel2',dark?'#2b2d29':'#e8e8e2');document.documentElement.style.setProperty('--text',dark?'#f5f5f2':'#20211f');document.documentElement.style.setProperty('--muted',dark?'#a8aaa4':'#62645e');document.documentElement.style.setProperty('--line',dark?'#3b3d38':'#d5d6ce');$('theme').textContent=dark?'☾':'☀'};
-$('deep').onclick=()=>{deep=!deep;$('deep').classList.toggle('active',deep);$('deep').textContent='🧠 Derin düşünme: '+(deep?'Açık':'Kapalı')};
-$('attach').onclick=()=>$('file').click();$('switchFile').onclick=()=>$('file').click();
-$('file').onchange=()=>{const f=$('file').files[0];if(!f)return;if(!f.type.startsWith('image/')){alert('Lütfen bir fotoğraf seç.');return}selectedFile=f;$('previewImg').src=URL.createObjectURL(f);$('preview').style.display='flex'};
-$('removePhoto').onclick=()=>{selectedFile=null;$('preview').style.display='none';$('file').value=''};
-$('readAloud').onclick=()=>{if(!lastAnswer){alert('Önce bir cevap al.');return}if(!('speechSynthesis'in window)){alert('Bu tarayıcı sesli okumayı desteklemiyor.');return}speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(lastAnswer);u.lang='tr-TR';speechSynthesis.speak(u)};
-$('mic').onclick=()=>{const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){alert('Bu tarayıcıda ses tanıma desteklenmiyor. Klavyedeki mikrofonu deneyebilirsin.');return}const rec=new SR();rec.lang='tr-TR';rec.onresult=e=>{$('input').value=e.results[0][0].transcript;$('input').focus()};rec.onerror=()=>alert('Mikrofon iznini ve tarayıcı ayarlarını kontrol et.');rec.start()};
-$('makeImage').onclick=()=>addMessage('Görsel oluşturma arayüzü hazır; gerçek üretim için görsel üretim API’si ve güvenli sunucu bağlantısı eklenmeli.','bot');
-$('makeVideo').onclick=()=>addMessage('Video oluşturma arayüzü hazır; gerçek üretim için video üretim API’si ve güvenli sunucu bağlantısı eklenmeli.','bot');
-$('camera').onclick=async()=>{if(!navigator.mediaDevices?.getUserMedia){$('file').click();return}try{stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'},audio:false});$('video').srcObject=stream;$('cameraModal').classList.add('open')}catch(e){alert('Kamera açılamadı. Siteyi HTTPS üzerinden açıp kamera iznini kontrol et. İstersen galeriden fotoğraf seçebilirsin.');$('file').click()}};
-function stopCamera(){if(stream){stream.getTracks().forEach(t=>t.stop());stream=null}$('video').srcObject=null;$('cameraModal').classList.remove('open')}
-$('closeCamera').onclick=stopCamera;$('takePhoto').onclick=()=>{const v=$('video'),c=$('canvas');if(!v.videoWidth){alert('Kamera henüz hazır değil.');return}c.width=v.videoWidth;c.height=v.videoHeight;c.getContext('2d').drawImage(v,0,0);c.toBlob(blob=>{selectedFile=new File([blob],'rurugbt-fotograf.jpg',{type:'image/jpeg'});$('previewImg').src=URL.createObjectURL(selectedFile);$('preview').style.display='flex';stopCamera()},'image/jpeg',.9)};window.addEventListener('beforeunload',()=>{if(stream)stream.getTracks().forEach(t=>t.stop())});
+
+// localAnswer: handles math and basic assistant replies
+function localAnswer(q){
+  const s = (q||'').toString().toLocaleLowerCase('tr-TR').trim();
+  // 1) simple math: allow expressions with numbers, parentheses, + - * / × ÷ and decimals
+  const mathOnly = /^\s*[-+()]?[0-9,.()\s\+\-*/×÷]+\s*$/;
+  if(mathOnly.test(s)){
+    // try to compute safely
+    try{
+      const expr = s.replace(/,/g,'.').replace(/×/g,'*').replace(/÷/g,'/');
+      // disallow unexpected chars
+      if(/^[0-9.()\+\-*/\s]+$/.test(expr)){
+        if(!/\*\*|\/\/|\*\//.test(expr)){
+          const result = Function('"use strict"; return ('+expr+')')();
+          if(typeof result === 'number' && isFinite(result)){
+            const out = (Math.abs(result - Math.round(result)) < 1e-12) ? String(Math.round(result)) : parseFloat(result.toFixed(12)).toString();
+            return 'Sonuç: ' + out;
+          }
+        }
+      }
+    }catch(e){ /* ignore and continue to natural replies */ }
+  }
+
+  // 2) greetings
+  if(/^(selam|merhaba|sa|selamlar)\b/.test(s)) return 'Selam! Ben RÜRÜGBT 🤖 Sana matematik, ödev, kod ve sohbet konularında yardımcı olmaya hazırım.';
+  // 3) identity
+  if(s.includes('kimsin')||s.includes('adın ne')) return 'Ben RÜRÜGBT Güncelleme. Türkçe konuşan bir yardımcı arayüzüyüm.';
+  // 4) homework
+  if(s.includes('ödev')||s.includes('metin sor')||s.includes('yardım')) return 'Tabii! Sorunun metnini yazabilir veya fotoğrafını ekleyebilirsin. Birlikte adım adım inceleyelim.';
+  // 5) image/video generation request
+  if(s.includes('görsel oluştur')||s.includes('resim yap')||s.includes('video oluştur')) return 'Bu arayüzde ilgili düğme hazır. Gerçek görsel/video üretmek için bir üretim API’si bağlanmalı.';
+  // 6) camera/photo help
+  if(s.includes('kamera')||s.includes('fotoğraf')) return 'Fotoğraf eklemek için 📷 düğmesini veya ＋ düğmesini kullanabilirsin. Fotoğrafı anlayıp sorularını cevaplamam için görsel desteği eklememiz gerekir.';
+  // 7) fallback
+  return 'Mesajını aldım! Şu anda arayüzün yerel deneme modu çalışıyor. Gerçek sohbet cevapları için güvenli bir sunucu üzerinden yapay zekâ API’si bağlanması gerekiyor.';
+}
+
+// Typing simulation: displays answer character-by-character with variable delay and supports stopping
+async function streamAnswer(answer, container, options = {}){
+  const len = answer.length || 1;
+  const speed = options.speed || 'normal';
+  // base multiplier by speed
+  const multipliers = { fast: 0.5, normal: 1, slow: 1.8 };
+  const mult = multipliers[speed] || 1;
+  const totalDelay = Math.min(3000, Math.max(250, Math.round(40 * len * mult)));
+  let perChar = Math.max(8, Math.round(totalDelay / len));
+
+  typingController.stopped = false;
+  container.textContent = '';
+
+  for(let i=0;i<answer.length;i++){
+    if(typingController.stopped) { container.textContent = answer; return; }
+    container.textContent += answer[i];
+    chat.scrollTop = chat.scrollHeight;
+    await new Promise(r => setTimeout(r, perChar));
+  }
+}
+
+async function sendMessage(){
+  const q = $('input').value.trim();
+  if(!q && !selectedFile) return;
+  const url = selectedFile ? URL.createObjectURL(selectedFile) : null;
+  if(q) addMessage(q,'user', url);
+  else if(url) addMessage('Fotoğraf gönderildi','user', url);
+
+  // show typing placeholder
+  const botDiv = addMessage('','bot');
+
+  // small delay before thinking
+  await new Promise(r => setTimeout(r, deep ? 700 : 250));
+
+  let answer;
+  if(selectedFile && !q){
+    answer = 'Fotoğraf alındı — yerel demo: fotoğraf analizi için gerçek bir görsel işleme API’si bağlanmalı.';
+  } else {
+    // if a Claude artifact (prompt) is provided, it could be used to alter behavior.
+    // Here we simply use localAnswer; if claudeArtifact exists you could modify localAnswer behavior.
+    answer = localAnswer(q);
+  }
+
+  lastAnswer = answer;
+
+  // use current speed setting
+  const speed = $('speed')?.value || 'normal';
+  // stream the answer; the Stop button sets typingController.stopped = true
+  await streamAnswer(answer, botDiv, { speed });
+}
+
+// Stop button handler
+$('stop').addEventListener('click', ()=>{ typingController.stopped = true; });
+
+// Event listeners
+$('send').addEventListener('click', sendMessage);
+$('input').addEventListener('keydown', e=>{ if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); sendMessage(); } });
+$('input').addEventListener('input', e=>{ const t = e.target; t.style.height='auto'; t.style.height = Math.min(150, t.scrollHeight) + 'px'; });
+
+document.querySelectorAll('[data-prompt]').forEach(b=>b.onclick=()=>{ $('input').value = b.dataset.prompt; $('input').focus(); });
+
+$('newChat').onclick = ()=>{ chat.innerHTML=''; const w = document.createElement('section'); w.className='welcome'; w.id='welcome'; w.innerHTML = '<div class="orb">🤖</div><h1>Yeni sohbet</h1><p>Ne hakkında konuşmak istersin?</p>'; chat.appendChild(w); };
+
+$('theme').onclick = ()=>{ dark = !dark; document.documentElement.style.setProperty('--bg', dark ? '#171817' : '#f4f4f0'); document.documentElement.style.setProperty('--panel', dark ? '#222421' : '#ffffff'); document.documentElement.style.setProperty('--text', dark ? '#f5f5f2' : '#111'); };
+$('deep').onclick = ()=>{ deep = !deep; $('deep').classList.toggle('active', deep); $('deep').textContent = '🧠 Derin düşünme: ' + (deep ? 'Açık' : 'Kapalı'); };
+
+// file attach / preview
+$('attach').onclick = ()=> $('file').click();
+$('file').onchange = ()=>{
+  const f = $('file').files[0]; if(!f) return; if(!f.type.startsWith('image/')){ alert('Lütfen bir fotoğraf seç.'); return; }
+  selectedFile = f;
+  $('previewImg').src = URL.createObjectURL(f);
+  $('preview').style.display = 'flex';
+  $('previewText').textContent = f.name;
+};
+$('removePhoto').onclick = ()=>{ selectedFile = null; $('preview').style.display='none'; $('file').value=''; };
+
+// read aloud
+$('readAloud').onclick = ()=>{
+  if(!lastAnswer){ alert('Önce bir cevap al.'); return; }
+  if(!('speechSynthesis' in window)){ alert('Bu tarayıcı sesli okumayı desteklemiyor.'); return; }
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(lastAnswer);
+  u.lang = 'tr-TR';
+  speechSynthesis.speak(u);
+};
+
+// microphone input
+$('mic').onclick = ()=>{
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if(!SR){ alert('Bu tarayıcıda ses tanıma desteklenmiyor.'); return; }
+  const r = new SR(); r.lang = 'tr-TR'; r.interimResults = false; r.maxAlternatives = 1;
+  r.onresult = e => { const t = e.results[0][0].transcript; $('input').value = t; $('input').focus(); };
+  r.onerror = e => { console.error(e); alert('Ses tanıma hatası: ' + e.error); };
+  r.start();
+};
+
+// image/video buttons (placeholders)
+$('makeImage').onclick = ()=> addMessage('Görsel oluşturma arayüzü hazır; gerçek üretim için görsel üretim API’si ve güvenli sunucu bağlantısı eklenmeli.','bot');
+$('makeVideo').onclick = ()=> addMessage('Video oluşturma arayüzü hazır; gerçek üretim için video üretim API’si ve güvenli sunucu bağlantısı eklenmeli.','bot');
+
+// camera modal
+$('camera').onclick = async ()=>{
+  if(!navigator.mediaDevices?.getUserMedia){ alert('Kamera desteği yok; lütfen dosya seçerek fotoğraf yükleyin.'); return; }
+  try{
+    stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' }, audio: false });
+    $('video').srcObject = stream; $('cameraModal').classList.add('open');
+  }catch(e){ console.error(e); alert('Kameraya erişilemedi: ' + e.message); }
+};
+function stopCamera(){ if(stream){ stream.getTracks().forEach(t=>t.stop()); stream = null; } $('video').srcObject = null; $('cameraModal').classList.remove('open'); }
+$('closeCamera').onclick = stopCamera; $('closeCamera2').onclick = stopCamera;
+$('takePhoto').onclick = ()=>{
+  const v = $('video'), c = $('canvas'); if(!v.videoWidth){ alert('Kamera henüz hazır değil.'); return; }
+  c.width = v.videoWidth; c.height = v.videoHeight; const ctx = c.getContext('2d'); ctx.drawImage(v,0,0,c.width,c.height);
+  c.toBlob(blob=>{ selectedFile = new File([blob], 'photo.png', { type: 'image/png' }); $('previewImg').src = URL.createObjectURL(selectedFile); $('preview').style.display = 'flex'; $('previewText').textContent = 'Kamera fotoğrafı'; stopCamera(); }, 'image/png');
+};
+
+// Load Claude artifact: prompt user to paste artifact JSON or text — we store it locally and show a small note
+$('loadClaude').onclick = ()=>{
+  const txt = prompt('Claude artifact içeriğini buraya yapıştırın (JSON veya metin).\n(Private: bu veri tarayıcıda tutulur, sunucuya gönderilmez)');
+  if(!txt) return; try{ claudeArtifact = JSON.parse(txt); alert('Claude artifact JSON olarak kaydedildi (local).'); }catch(e){ claudeArtifact = txt; alert('Claude artifact metin olarak kaydedildi (local).'); }
+  console.log('Loaded Claude artifact:', claudeArtifact);
+  // You can use claudeArtifact to change assistant behavior or system prompt in future API integrations.
+};
+
+// Keep focus and small accessibility
+$('input').setAttribute('aria-label','Mesaj');
+
 </script>
 </body></html>
